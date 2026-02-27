@@ -1,0 +1,248 @@
+<mat-card id="card" style="text-align: center;">
+
+  <mat-card-title>
+    Ažuriranje podataka o životinjama
+  </mat-card-title>
+
+  <mat-card-content>
+    <form  #newAnimalForm="ngForm" class="animal-register-form" (ngSubmit)="onSubmit(newAnimalForm)">
+      <div class="container">
+        <mat-label>Životinja je u skloništu: {{animal.animalTimeInShelterCounter}}</mat-label>
+      </div>
+      <div class="container">
+        <mat-label>Starost životinje: {{animal.animalAgeCounter}}</mat-label>
+      </div>
+      <div class="container">
+        <mat-form-field appearance="outline">
+          <mat-label>ID životinje</mat-label>
+          <input matInput [(ngModel)]="animal.specialID" type="text" name="animalID" placeholder="" required
+                 #idInput="ngModel">
+          <mat-error *ngIf="idInput.invalid && (idInput.dirty || idInput.touched)" class="error">
+            <p *ngIf="idInput.errors.required">Polje za ID životinje ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="container">
+        <mat-form-field appearance="outline" class="one-half">
+          <mat-label>Grad</mat-label>
+          <mat-select [(ngModel)]="animal.admissionCity" type="text" name="city" placeholder="" required
+                      #cityInput="ngModel">
+            <mat-option *ngFor="let city of cities;" [value]="city['city']">{{city['city']}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="cityInput.invalid && (cityInput.dirty || cityInput.touched)" class="error">
+            <p *ngIf="cityInput.errors.required">Polje za grad ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="one-half">
+          <mat-label>Region</mat-label>
+          <mat-select [(ngModel)]="animal.admissionRegion" type="text" name="region" placeholder="" required
+                      #regionInput="ngModel">
+            <ng-container *ngFor="let city of cities;">
+              <ng-container *ngIf="city['city'] == cityInput.value">
+                <mat-option  *ngFor="let region of city['region']" [value]="region">{{region}}</mat-option>
+              </ng-container>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="regionInput.invalid && (regionInput.dirty || regionInput.touched)" class="error">
+            <p *ngIf="regionInput.errors.required">Polje za region ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="fill">
+          <mat-label>Datum prijema</mat-label>
+          <input matInput [(ngModel)]="animal.admissionDate" name="dateAccepted" placeholder="" required
+                 #dateAcceptedInput="ngModel" [matDatepicker]="picker1">
+          <mat-error *ngIf="dateAcceptedInput.invalid && (dateAcceptedInput.dirty || dateAcceptedInput.touched)" class="error">
+            <p *ngIf="dateAcceptedInput.errors.required">Polje za datum prijema ne može biti prazno</p>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="fill">
+          <mat-label>Datum integracije mikročipa</mat-label>
+          <input matInput [(ngModel)]="animal.microchipIntegrationDate" name="dateChiped" placeholder=""
+                 #dateChipedInput="ngModel" [matDatepicker]="picker2">
+          <mat-error *ngIf="dateChipedInput.invalid && (dateChipedInput.dirty || dateChipedInput.touched)" class="error">
+            <p *ngIf="dateChipedInput.errors.required">Polje za datum integracije mikročipa ne može biti prazno</p>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="fill">
+          <mat-label>Datum vakcinacije</mat-label>
+          <input matInput [(ngModel)]="animal.vaccinationDate" name="dateVaccine" placeholder=""
+                 #dateVaccineInput="ngModel" [matDatepicker]="picker3">
+          <mat-error *ngIf="dateVaccineInput.invalid && (dateVaccineInput.dirty || dateVaccineInput.touched)" class="error">
+            <p *ngIf="dateVaccineInput.errors.required">Polje za datum vakcinacije ne može biti prazno</p>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="outline">
+          <mat-label>Vrsta životinje</mat-label>
+          <mat-select [(ngModel)]="animal.animalType" type="text" name="type" placeholder="" required #typeInput="ngModel">
+
+            <mat-option [value]="0">Pas</mat-option>
+            <mat-option [value]="1">Mačka</mat-option>
+            <mat-option [value]="2">Drugo</mat-option>
+          </mat-select>
+          <mat-error *ngIf="typeInput.invalid && (typeInput.dirty || typeInput.touched)" class="error">
+            <p *ngIf="typeInput.errors.required">Polje za vrstu životinje ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="outline">
+          <mat-label>Pol životinje</mat-label>
+          <mat-select [(ngModel)]="animal.gender" type="text" name="gender" placeholder="" required
+                      #genderInput="ngModel">
+
+            <mat-option [value]="0">Muški</mat-option>
+            <mat-option [value]="1">Ženski</mat-option>
+            <mat-option [value]="2">Nepoznato</mat-option>
+          </mat-select>
+          <mat-error *ngIf="genderInput.invalid && (genderInput.dirty || genderInput.touched)" class="error">
+            <p *ngIf="genderInput.errors.required">Polje za pol životinje ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="outline" class="one-half">
+          <mat-label>Godine</mat-label>
+          <input matInput [(ngModel)]="animal.years" type="number" name="ageYear" placeholder="" pattern="^[0-9]\d*$"
+                 #ageYearInput="ngModel"  required>
+          <mat-error *ngIf="ageYearInput.invalid && (ageYearInput.dirty || ageYearInput.touched)" class="error">
+            <p *ngIf="ageYearInput.errors.required">Polje za godine ne može biti prazno</p>
+            <p *ngIf="ageYearInput.errors.pattern">Godine ne mogu biti manje od 0</p>
+          </mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="one-half">
+          <mat-label>Meseci</mat-label>
+          <input matInput [(ngModel)]="animal.months" type="number" name="ageMonth" placeholder="" pattern="^([0-9]|[0-1][0-2])$"
+                 #ageMonthInput="ngModel" required>
+          <mat-error *ngIf="ageMonthInput.invalid && (ageMonthInput.dirty || ageMonthInput.touched)"  class="error">
+            <p *ngIf="ageMonthInput.errors.required">Polje za mesece ne može biti prazno</p>
+            <p *ngIf="ageMonthInput.errors.pattern">Meseci moraju biti između 0 i 12</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="container">
+        <mat-form-field appearance="outline" class="one-half">
+          <mat-label>Dužina krzna</mat-label>
+          <mat-select [(ngModel)]="animal.furType" type="text" name="furLength" placeholder="" required
+                      #furLengthInput="ngModel">
+            <mat-option [value]="0">Kratkodlaki</mat-option>
+            <mat-option [value]="1">Grubodlaki</mat-option>
+            <mat-option [value]="2">Srednje dužine</mat-option>
+            <mat-option [value]="3">Dugodlaki</mat-option>
+          </mat-select>
+          <mat-error *ngIf="furLengthInput.invalid && (furLengthInput.dirty || furLengthInput.touched)" class="error">
+            <p *ngIf="furLengthInput.errors.required">Polje za dužinu krzna ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="one-half">
+          <mat-label>Boja krzna</mat-label>
+          <input matInput [(ngModel)]="animal.furColor" type="text" name="furColor" placeholder=""
+                 #furColorInput="ngModel" required>
+
+          <mat-error *ngIf="furColorInput.invalid && (furColorInput.dirty || furColorInput.touched)" class="error">
+            <p *ngIf="furColorInput.errors.required">Polje za boju krzna ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="fill">
+          <mat-label>Specijalni znakovi</mat-label>
+          <textarea matInput [(ngModel)]="animal.specialTags" type="text" name="specialMarks" placeholder=""
+                    #specialMarksInput="ngModel"></textarea>
+          <mat-error *ngIf="specialMarksInput.invalid && (specialMarksInput.dirty || specialMarksInput.touched)" class="error">
+            <p *ngIf="specialMarksInput.errors.required">Polje za specijalne znakove ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="fill">
+          <mat-label>Zdravstveno stanje</mat-label>
+          <textarea matInput [(ngModel)]="animal.healthCondition" type="text" name="health" placeholder=""
+                    #healthInput="ngModel" required></textarea>
+          <mat-error *ngIf="healthInput.invalid && (healthInput.dirty || healthInput.touched)" class="error">
+            <p *ngIf="healthInput.errors.required">Polje za zdravstveno stanje ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="container">
+        <mat-form-field appearance="fill">
+          <mat-label>Kontakt podaci</mat-label>
+          <textarea matInput [(ngModel)]="animal.admissionOrganisationContacts" type="text" name="contactInfo" placeholder=""
+                    #contactInput="ngModel" required></textarea>
+          <mat-error *ngIf="contactInput.invalid && (contactInput.dirty || contactInput.touched)" class="error">
+            <p *ngIf="contactInput.errors.required">Polje za kontaktne podatke ne može biti prazno</p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="container">
+        <mat-form-field appearance="outline" class="one-half">
+          <mat-label>Status životinje</mat-label>
+          <mat-select [(ngModel)]="animal.statusID" type="number" name="status" #statusInput="ngModel">
+
+            <mat-option [value]="1">Usvojen</mat-option>
+            <mat-option [value]="2">Preminuo</mat-option>
+            <mat-option [value]="3">Živi u azilu</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="statusInput.value=='1' || statusInput.value=='2'">
+        <mat-form-field appearance="fill" class="one-half">
+          <mat-label>Datum statusa</mat-label>
+          <input matInput [(ngModel)]="animal.statusDate" name="statusDate" placeholder=""
+                 #statusDate="ngModel" [matDatepicker]="picker4">
+          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+          <mat-datepicker #picker4></mat-datepicker>
+        </mat-form-field>
+        </div>
+      </div>
+    
+
+      <div class="container">
+  <mat-form-field appearance="outline" class="one-half">
+    <mat-label>Smeštaj 🏠</mat-label>
+    <mat-select [(ngModel)]="animal.accommodationId" name="accommodation" #accInput="ngModel" required>
+      <mat-option *ngFor="let acc of accommodations" [value]="acc.id">{{acc.name}} ({{acc.type}})</mat-option>
+    </mat-select>
+    <mat-error *ngIf="accInput.invalid && (accInput.dirty || accInput.touched)">
+      <p *ngIf="accInput.errors.required">Polje za smeštaj ne sme biti prazno</p>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="one-half">
+    <mat-label>Kavez / Broj mesta</mat-label>
+    <input matInput [(ngModel)]="animal.cageNumber" type="text" name="cageNumber">
+  </mat-form-field>
+</div>
+
+<div class="left">
+        <button mat-raised-button (click)="onSaveButtonClick()" [disabled]="newAnimalForm.invalid" color="primary">Ažuriraj
+        </button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,106 @@
+<mat-card class="animal-card">
+  <mat-card-title>📋 Lista životinja</mat-card-title>
+
+  <form class="filter-form" [formGroup]="filterForm">
+    <div class="date-filter-container">
+      <mat-form-field>
+        <input matInput [matDatepicker]="fromDate" placeholder="Od datuma" formControlName="fromDate">
+        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="toDate" placeholder="Do datuma" formControlName="toDate">
+        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        <mat-datepicker #toDate></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="filterAnimals()">Filtriraj</button>
+      <button mat-stroked-button color="warn" (click)="resetAnimalList()">Očisti</button>
+    </div>
+
+    <div class="form-actions">
+      <app-report-form></app-report-form>
+    </div>
+  </form>
+
+  <app-floating-btn></app-floating-btn>
+
+  <table #animalTable mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+
+    <!-- ID -->
+    <ng-container matColumnDef="specialID">
+      <mat-header-cell *matHeaderCellDef> ID životinje </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.specialID}} </mat-cell>
+    </ng-container>
+
+    <!-- Datum prijema -->
+    <ng-container matColumnDef="admissionDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Datum prijema</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.admissionDate | date: 'yyyy-MM-dd'}} </mat-cell>
+    </ng-container>
+
+    <!-- Datum vakcinacije -->
+    <ng-container matColumnDef="vaccinationDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Datum vakcinacije</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span [ngClass]="{'text-danger': needVaccine(element)}">
+          {{element.vaccinationDate ? (element.vaccinationDate | date: 'yyyy-MM-dd') : '-'}}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{StatusEnum[element.statusID]}} </mat-cell>
+    </ng-container>
+
+    <!-- Datum statusa -->
+    <ng-container matColumnDef="statusDate">
+      <mat-header-cell *matHeaderCellDef> Datum statusa </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+        {{element.statusDate ? (element.statusDate | date: 'yyyy-MM-dd') : '-'}} 
+      </mat-cell>
+    </ng-container>
+
+        <!-- Ikone -->
+     <ng-container matColumnDef="icons">
+  <mat-header-cell *matHeaderCellDef>Akcije</mat-header-cell>
+
+  <mat-cell *matCellDef="let element" class="icon-cell">
+
+    <!-- Ikone se prikazuju samo ako NIJE poklonjen -->
+    <ng-container *ngIf="StatusEnum[element.statusID] !== 'Poklonjen'">
+
+      <span matTooltip="Preuzmi izveštaj" class="material-icons icon"
+            (click)="generateAct(element.id)">get_app</span>
+
+      <span matTooltip="Izmeni podatke" class="material-icons icon"
+            (click)="navigateToEdit(element)">edit</span>
+
+      <span matTooltip="Obriši" class="material-icons icon"
+            (click)="deleteAnimal(element.id)">delete</span>
+
+       
+    <span *ngIf="needVaccine(element)" class="material-icons warning-icon">warning</span>
+    </ng-container>
+
+    <!-- Ako jeste poklonjen — samo prazan simbol -->
+    <ng-container *ngIf="StatusEnum[element.statusID] === 'Poklonjen'">
+      -
+    </ng-container>
+
+  </mat-cell>
+</ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="6">Nema podataka koji odgovaraju filteru</td>
+    </tr>
+  </table>
+</mat-card>

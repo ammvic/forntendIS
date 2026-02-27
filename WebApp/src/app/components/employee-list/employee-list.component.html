@@ -1,0 +1,57 @@
+<mat-card>
+    <mat-card-title>Lista zaposlenih</mat-card-title>
+  
+    <table #employeeTable mat-table [dataSource]="dataSource" matSort>
+      
+  
+      <!-- Ime Column -->
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef> Ime </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+      </ng-container>
+  
+      <!-- Prezime Column -->
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef> Prezime </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+      </ng-container>
+  
+      <!-- Uloga Column -->
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef> Uloga </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.role}} </mat-cell>
+      </ng-container>
+  
+      <!-- Datum zapošljavanja Column -->
+      <ng-container matColumnDef="employmentDate">
+        <mat-header-cell *matHeaderCellDef> Datum zapošljavanja </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.employmentDate.toString().substring(0, 10)}} </mat-cell>
+      </ng-container>
+  
+      <!-- Icons Column -->
+      <ng-container matColumnDef="icons">
+        <mat-header-cell *matHeaderCellDef> Akcije </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span (click)="editEmployee(element)" class="material-icons icon">edit</span>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Dodela zadatka Column -->
+      <ng-container matColumnDef="assignTask">
+        <mat-header-cell *matHeaderCellDef> Dodeli zadatak </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-stroked-button color="primary" (click)="assignTask(element)">
+            Dodeli
+          </button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="6">Nema podataka</td>
+      </tr>
+    </table>
+  </mat-card>
+  

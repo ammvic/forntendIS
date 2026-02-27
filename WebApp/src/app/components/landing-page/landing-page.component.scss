@@ -1,0 +1,107 @@
+/* HERO WRAPPER */
+.hero {
+  position: relative;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  background: url('src/images/catdog2.jpeg') center/cover no-repeat;
+  color: white;
+}
+
+/* DARK OVERLAY */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+/* CONTENT */
+.hero-content {
+  position: relative;
+  max-width: 800px;
+  z-index: 2;
+}
+
+.slogan {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.text {
+  font-size: 1.1rem;
+  margin: 6px 0;
+  opacity: 0.95;
+}
+
+/* BUTTON GROUP */
+.btn-group {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.25s ease;
+  text-decoration: none;
+}
+
+.btn.primary {
+  background: #ff914d;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #ff7a24;
+}
+
+.btn.outline {
+  border: 2px solid #ffffff;
+  color: #fff;
+}
+
+.btn.outline:hover {
+  background: white;
+  color: #333;
+}
+
+/* LEARN MORE LINK */
+.learn-more {
+  display: inline-block;
+  margin-top: 20px;
+  color: #ffcb8e;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.learn-more:hover {
+  opacity: 0.7;
+}
+
+/* SIMPLE FADE-IN ANIMATION */
+.fade-in {
+  animation: fadeIn 1.2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

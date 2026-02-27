@@ -1,0 +1,35 @@
+form{
+  width: 80%;
+  margin: 0 auto;
+}
+mat-form-field{
+  width: 100%;
+}
+
+.one-half{
+  width: 60%;
+}
+
+.container{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.left{
+  text-align: left;
+}
+
+mat-card {
+  max-width: 50%;
+  margin: 1em auto;
+  text-align: center;
+}
+
+mat-card-title{
+  margin: 20px 0;
+}
+
+mat-label{
+  margin-bottom: 10px;
+}

@@ -1,0 +1,24 @@
+<div class="tasks-container">
+  <mat-card *ngIf="tasks.length === 0" class="no-tasks-card">
+    Trenutno nema zadataka.
+  </mat-card>
+
+  <div class="task-cards" *ngIf="tasks.length > 0">
+    <mat-card class="task-card" *ngFor="let task of tasks">
+      <mat-card-header>
+        <mat-card-title>{{ task.employeeFirstName }} {{ task.employeeLastName }}</mat-card-title>
+        <mat-card-subtitle>
+          Dodeljen: {{ task.assignedDate | date:'short' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Zadatak:</strong> {{ task.taskDescription }}</p>
+       
+        <p>Status: 
+          <span class="done" *ngIf="task.isCompleted">Završeno ✔</span>
+          <span class="pending" *ngIf="!task.isCompleted">Aktivan</span>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

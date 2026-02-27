@@ -1,0 +1,197 @@
+<mat-card id="card" class="animal-card">
+
+  <mat-card-title class="title">
+    📝 Registracija životinje 🐾
+  </mat-card-title>
+
+  <mat-card-content>
+    <form #newAnimalForm="ngForm"
+          class="animal-register-form"
+          (ngSubmit)="onSubmit(newAnimalForm)">
+
+      <!-- ID -->
+      <div class="row">
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>ID životinje 🔢</mat-label>
+          <input matInput [(ngModel)]="animal.specialID"
+                 name="specialID" required #specialIDInput="ngModel">
+          <mat-error *ngIf="specialIDInput.invalid && (specialIDInput.dirty || specialIDInput.touched)">
+            Polje za ID životinje ne sme biti prazno
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Slika -->
+     <div class="upload-box">
+  <label class="upload-label">Slika životinje</label>
+
+  <div class="upload-custom" (click)="fileInput.click()">
+    <span>📁 Klikni ili ubaci sliku</span>
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      (change)="onFileSelected($event)"
+      hidden
+    >
+  </div>
+
+  <div class="image-preview" *ngIf="previewImage">
+    <img [src]="previewImage" alt="preview">
+  </div>
+</div>
+
+
+      <!-- Grad i Region -->
+      <div class="row">
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Grad 🏙️</mat-label>
+          <mat-select [(ngModel)]="animal.admissionCity"
+                      name="admissionCity" required #cityInput="ngModel">
+            <mat-option *ngFor="let city of cities" [value]="city['city']">
+              {{ city['city'] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Region 🗺️</mat-label>
+          <mat-select [(ngModel)]="animal.admissionRegion" name="admissionRegion" required>
+            <ng-container *ngFor="let c of cities">
+              <ng-container *ngIf="c['city'] === animal.admissionCity">
+                <mat-option *ngFor="let region of c['region']" [value]="region">
+                  {{ region }}
+                </mat-option>
+              </ng-container>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Datumi -->
+      <div class="row">
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Datum prijema 📅</mat-label>
+          <input matInput [matDatepicker]="picker1"
+                 [(ngModel)]="animal.admissionDate"
+                 name="admissionDate" required>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Datum rođenja 🎂</mat-label>
+          <input matInput [matDatepicker]="picker2"
+                 [(ngModel)]="animal.birthday"
+                 name="birthday" required>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <!-- Mikročip i vakcinacija -->
+      <div class="row">
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Datum mikročipa 💉</mat-label>
+          <input matInput [matDatepicker]="picker3"
+                 [(ngModel)]="animal.microchipIntegrationDate"
+                 name="microchipIntegrationDate">
+          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+          <mat-datepicker #picker3></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Datum vakcinacije 💉</mat-label>
+          <input matInput [matDatepicker]="picker4"
+                 [(ngModel)]="animal.vaccinationDate"
+                 name="vaccinationDate">
+          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+          <mat-datepicker #picker4></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <!-- Vrsta i Pol -->
+      <div class="row">
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Vrsta životinje 🐕🐈</mat-label>
+          <mat-select [(ngModel)]="animal.animalType" name="animalType" required>
+            <mat-option [value]="0">Pas</mat-option>
+            <mat-option [value]="1">Mačka</mat-option>
+            <mat-option [value]="2">Drugo</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Pol životinje ♂️♀️</mat-label>
+          <mat-select [(ngModel)]="animal.gender" name="gender" required>
+            <mat-option [value]="0">Muški</mat-option>
+            <mat-option [value]="1">Ženski</mat-option>
+            <mat-option [value]="2">Nepoznat</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Dlaka i boja -->
+      <div class="row">
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Dužina dlake 🐩</mat-label>
+          <mat-select [(ngModel)]="animal.furType" name="furType" required>
+            <mat-option *ngFor="let num of [0,1,2,3]" [value]="num">
+              {{ FurTypeEnum[num] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Boja dlake 🎨</mat-label>
+          <input matInput [(ngModel)]="animal.furColor" name="furColor" required>
+        </mat-form-field>
+      </div>
+
+      <!-- Ostalo -->
+      <mat-form-field appearance="fill" class="full">
+        <mat-label>Posebne oznake 🏷️</mat-label>
+        <textarea matInput [(ngModel)]="animal.specialTags" name="specialTags"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full">
+        <mat-label>Zdravstveno stanje ❤️‍🩹</mat-label>
+        <textarea matInput [(ngModel)]="animal.healthCondition"
+                  name="healthCondition" required></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full">
+        <mat-label>Kontakt podaci 📞</mat-label>
+        <textarea matInput [(ngModel)]="animal.admissionOrganisationContacts"
+                  name="admissionOrganisationContacts" required></textarea>
+      </mat-form-field>
+
+      <!-- Smeštaj -->
+      <div class="row">
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Smeštaj 🏠</mat-label>
+          <mat-select [(ngModel)]="animal.accommodationId"
+                      name="accommodationId" required>
+            <mat-option *ngFor="let acc of accommodations" [value]="acc.id">
+              {{ acc.name }} ({{ acc.type }})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half">
+          <mat-label>Kavez / Broj mesta</mat-label>
+          <input matInput [(ngModel)]="animal.cageNumber" name="cageNumber">
+        </mat-form-field>
+      </div>
+
+      <div class="submit-box">
+        <button mat-raised-button color="primary"
+                [disabled]="newAnimalForm.invalid"
+                (click)="onAddButtonClick()">
+          ✅ Registruj
+        </button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

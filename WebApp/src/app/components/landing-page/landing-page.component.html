@@ -1,0 +1,46 @@
+<header class="hero">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h2 class="slogan fade-in">Jedna prijava — jedna spašena šapa. 🐾</h2>
+
+    <h1 class="title fade-in">
+      <i class="fas fa-paw"></i>
+      Sistem za Azil za Životinje
+      <i class="fas fa-paw"></i>
+    </h1>
+
+    <ng-container *ngIf="userService.isLoggedIn(); else guest">
+      <p class="text fade-in">
+        ❤️ Svaka životinja u našem azilu dobija šansu za novi početak — sa toplinom, negom i pažnjom.
+      </p>
+      <p class="text fade-in">
+        🏡 Trenutno brinemo o više od 100 napuštenih i povređenih životinja.
+      </p>
+      <p class="text fade-in">
+        🩺 Uz stalnu veterinarsku brigu i kvalitetnu ishranu, osiguravamo im život bez bola i straha.
+      </p>
+
+      <div class="btn-group fade-in">
+        <a class="btn primary" routerLink="/animals">
+          <i class="fas fa-search"></i> Pogledaj životinje
+        </a>
+      </div>
+    </ng-container>
+
+    <ng-template #guest>
+      <p class="text fade-in">
+        🐾 Pridruži se našoj misiji i pomozi životinjama koje nemaju glas.
+      </p>
+
+      <div class="btn-group fade-in">
+        <a class="btn primary" routerLink="/login">
+          <i class="fas fa-sign-in-alt"></i> Prijavi se
+        </a>
+        <a class="btn outline" routerLink="/register">
+          <i class="fas fa-user-plus"></i> Registruj se
+        </a>
+      </div>
+    </ng-template>
+  </div>
+</header>

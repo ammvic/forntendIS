@@ -1,0 +1,26 @@
+// General styling for the dialog
+mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  // Ensure full-width for form fields
+  mat-form-field.full-width {
+    width: 100%;
+  }
+  
+  // Style for actions at the bottom
+  mat-dialog-actions {
+    margin-top: 16px;
+  
+    // Align buttons to the right
+    display: flex;
+    justify-content: flex-end;
+  
+    // Add spacing between buttons
+    button {
+      margin-left: 8px;
+    }
+  }
+  

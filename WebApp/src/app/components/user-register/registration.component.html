@@ -1,0 +1,80 @@
+<div class="signin-content">
+  <mat-card>
+    <mat-card-title>Registracija zaposlenog</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="full-width-input" appearance="outline">
+          <mat-icon matPrefix>account_box</mat-icon>
+          <input matInput type="text" placeholder="Ime" formControlName="firstName" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+          <mat-error>
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required" class="error">Unesite ime</div>
+          </div>
+          </mat-error>
+
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width-input" appearance="outline">
+          <mat-icon matPrefix>account_box</mat-icon>
+          <input matInput type="text" placeholder="Prezime" formControlName="lastName" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"/>
+          <mat-error>
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required" class="error">Unesite prezime</div>
+          </div>
+            </mat-error>
+
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width-input" appearance="outline">
+          <mat-icon matPrefix>email</mat-icon>
+
+          <input matInput type="email" placeholder="Email" formControlName="email" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+          <mat-error>
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required" class="error">Unesite email</div>
+            <div *ngIf="f.email.errors.email" class="error">Unesite ispravan email</div>
+          </div>
+            </mat-error>
+
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width-input" appearance="outline">
+          <mat-icon matPrefix>vpn_key</mat-icon>
+
+          <input matInput type="password" placeholder="Lozinka" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$" formControlName="password" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+          <mat-error>
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.invalid" class="error">Lozinka mora da sadrži barem jedno malo i veliko slovo, te broj</div>
+            <div *ngIf="f.password.errors.required" class="error">Unesite lozinku</div>
+            <div *ngIf="f.password.errors.minlength" class="error">Lozinka mora da ima najmanje 6 karaktera</div>
+
+          </div>
+            </mat-error>
+
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width-input" appearance="outline">
+          <mat-icon matPrefix>vpn_key</mat-icon>
+
+          <input matInput type="password" placeholder="Ponovite lozinku" formControlName="confirmPassword"
+                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"/>
+          <mat-error>
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors" class="error">Lozinke moraju da se poklapaju</div>
+          </div>
+            </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Registruj zaposlenog
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

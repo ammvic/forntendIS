@@ -1,0 +1,109 @@
+.tasks-container {
+  margin: 100px 20px 20px; // udaljava od header-a i sa strane
+
+  .no-tasks-card {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #777;
+    background-color: #f9f9f9;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-weight: 500;
+  }
+
+  .task-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+
+    .task-card {
+      background: linear-gradient(145deg, #ffffff, #f6f8fa);
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+      }
+
+      mat-card-header {
+        background-color: #e3f2fd;
+        padding: 16px;
+
+        mat-card-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #0d47a1;
+        }
+
+        mat-card-subtitle {
+          font-size: 13px;
+          color: #555;
+        }
+      }
+
+      mat-card-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        p {
+          margin: 0;
+          font-size: 15px;
+          color: #333;
+
+          strong {
+            font-weight: 600;
+          }
+        }
+
+        .status {
+          display: inline-flex;
+          align-items: center;
+          font-weight: 600;
+          font-size: 14px;
+          padding: 4px 10px;
+          border-radius: 12px;
+          width: fit-content;
+        }
+
+        .done {
+          background: #d0f0c0;
+          color: #2e7d32;
+
+          &::after {
+            content: '✔';
+            margin-left: 6px;
+            font-size: 14px;
+          }
+        }
+
+        .pending {
+          background: #fff3e0;
+          color: #f57c00;
+        }
+      }
+
+      mat-card-actions {
+        padding: 16px;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .task-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<form [formGroup]="generationForm" (ngSubmit)="onSubmit()">
+
+  <div class="container">
+    <mat-form-field>
+      <mat-label>Godina</mat-label>
+      <mat-select matNativeControl formControlName="year" required>
+        <mat-option *ngFor="let year of years" value="{{year}}">{{year}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tip životinje</mat-label>
+      <mat-select matNativeControl formControlName="type" required>
+        <mat-option value="0">Pas</mat-option>
+        <mat-option value="1">Mačka</mat-option>
+        <mat-option value="2">Drugi</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="warn">Generiši izveštaj</button>
+  </div>
+</form>

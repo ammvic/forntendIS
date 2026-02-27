@@ -1,0 +1,79 @@
+<div class="animals-container">
+  <h1 class="title">Dostupne životinje za usvajanje</h1>
+
+  <!-- FILTERI -->
+<div class="filter-container glass">
+  <div class="filter-group">
+    <label>Tip životinje</label>
+    <select [(ngModel)]="filters.type" (change)="applyFilters()">
+      <option value="">Sve</option>
+      <option value="0">Pas</option>
+      <option value="1">Mačka</option>
+      <option value="2">Drugo</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Pol</label>
+    <select [(ngModel)]="filters.gender" (change)="applyFilters()">
+      <option value="">Oba</option>
+      <option value="0">Muški</option>
+      <option value="1">Ženski</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Grad</label>
+    <input type="text" [(ngModel)]="filters.city" placeholder="Unesite grad..." (input)="applyFilters()" />
+  </div>
+</div>
+
+
+  <div class="animals-grid">
+    <div class="animal-card glass" *ngFor="let a of filteredAnimals">
+      <img [src]="getAnimalImageUrl(a.imageUrl)" alt="Animal Image" class="animal-img" />
+
+      <div class="info">
+        <h2 class="animal-type">{{ animalTypeMap[a.animalType] }}</h2>
+        <p><i class="icon">♂︎</i><strong> Pol:</strong> {{ a.gender === 0 ? 'Muški' : 'Ženski' }}</p>
+        <p><i class="icon">🎨</i><strong> Boja:</strong> {{ a.furColor }}</p>
+        <p><i class="icon">⭐</i><strong> Osobine:</strong> {{ a.specialTags }}</p>
+        <p><i class="icon">❤️</i><strong> Zdravlje:</strong> {{ a.healthCondition }}</p>
+        <p><i class="icon">📍</i><strong> Lokacija:</strong> {{ a.admissionCity }}</p>
+      </div>
+
+      <button class="btn adopt glass-btn" (click)="openAdoptModal(a)">Usvoji</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADOPTION MODAL -->
+<div class="modal-backdrop" *ngIf="selectedAnimal" style="z-index: 1000;">
+  <div class="modal-content glass">
+    <div class="form-field">
+      <label>Ime i prezime</label>
+      <input type="text" [(ngModel)]="form.fullName">
+    </div>
+    <div class="form-field">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="form.email">
+    </div>
+    <div class="form-field">
+      <label>Broj telefona</label>
+      <input type="tel" [(ngModel)]="form.phone">
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn send glass-btn" (click)="sendRequest()">Pošalji zahtev</button>
+      <button type="button" class="btn cancel glass-btn" (click)="cancel()">Otkaži</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-backdrop" *ngIf="successModal" style="z-index: 2000;">
+  <div class="success-modal glass">
+    <h2>✔ Zahtev uspešno poslat!</h2>
+    <p>Hvala što ste izabrali da usvojite životinju. Uskoro ćemo vas kontaktirati.</p>
+    <button type="button" class="btn glass-btn" (click)="successModal = false">Zatvori</button>
+  </div>
+</div>

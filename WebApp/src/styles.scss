@@ -1,0 +1,28 @@
+.error {
+  color: red;
+}
+
+/* You can add global styles to this file, and also import other style files */
+.content {
+  min-height: 87%;
+
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-image: linear-gradient(rgba(220, 80, 20, 0.4), rgba(255, 140, 0, 0.4));
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-repeat: no-repeat;
+  background-attachment: fixed;}
+
+
+.content {
+  padding-top: 48px;
+  min-height: 87%;
+
+}
+

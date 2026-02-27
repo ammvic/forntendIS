@@ -1,0 +1,33 @@
+
+<div class="signin-content">
+  <mat-card>
+    <mat-card-title>Prijava</mat-card-title>
+    <mat-card-content>
+      <form #loginForm="ngForm" class="login-form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="full-width-input" appearance="outline">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="user.email" name="email" email type="email" required #emailInput="ngModel">
+          <mat-error *ngIf="passInput.invalid && (passInput.dirty || passInput.touched)" class="error">
+            <p *ngIf="passInput.errors.required">Neispravan email.</p></mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width-input" appearance="outline">
+          <mat-icon matPrefix>vpn_key</mat-icon>
+          <mat-label>Lozinka</mat-label>
+          <input matInput [(ngModel)]="user.password" type="password" name="pass" required #passInput="ngModel">
+          <mat-error *ngIf="passInput.invalid && (passInput.dirty || passInput.touched)" class="error">
+            <p *ngIf="passInput.errors.required">Lozinka nije uneta</p></mat-error>
+        </mat-form-field>
+        <p *ngIf="submitted && errorMessage!= null" class="error">Neispravni podaci za prijavu</p>
+        <div>
+          <button mat-raised-button color="primary" (click)="onLoginButtonClick()">Prijavi se</button>
+          <p>
+            <button mat-raised-button color="primary" type="button" class="registrationBttn" routerLink="/register" routerLinkActive="active">Registruj se</button>
+          </p>
+         
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

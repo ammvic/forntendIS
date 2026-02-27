@@ -1,0 +1,100 @@
+/* MAIN NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+  z-index: 50;
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  transition: 0.35s ease;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile-btn .mat-icon {
+  color: white !important;
+  font-size: 26px;
+}
+
+
+/* When scrolled — solid background */
+.navbar.scrolled {
+  background: #534741;
+  backdrop-filter: blur(0);
+  border-bottom: none;
+}
+
+/* LEFT PART (logo + links) */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* LOGO */
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* LINKS */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.links a {
+  color: #f2f2f2;
+  text-decoration: none;
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 6px;
+  transition: 0.25s ease;
+}
+
+.links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.links a.active {
+  background: #e87e04;
+  color: white;
+}
+
+/* RIGHT SIDE (profile menu) */
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-right: 40px; /* pomeri koliko ti treba */
+}
+
+
+.profile-btn {
+  color: white !important;
+  border-radius: 50%;
+  transition: 0.25s ease;
+}
+
+.profile-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* OPTIONAL SHADOW WHEN SCROLLED */
+.navbar.scrolled {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}

@@ -1,0 +1,76 @@
+form{
+  width: 80%;
+  margin: 0 auto;
+}
+mat-form-field{
+width: 100%;
+}
+
+.one-half{
+  width: 45%;
+}
+
+.upload-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.upload-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.upload-custom {
+  width: 100%;
+  padding: 18px;
+  background: #fafafa;
+  border: 2px dashed #cfcfcf;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.upload-custom:hover {
+  background: #f1f1f1;
+  border-color: #b8b8b8;
+  color: #333;
+}
+
+.image-preview {
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 240px;
+  border-radius: 12px;
+  margin-top: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transition: 0.25s ease;
+}
+
+.image-preview img:hover {
+  transform: scale(1.03);
+}
+
+
+.container{
+display: flex;
+justify-content: space-around;
+}
+
+
+.left{
+  text-align: left;
+}
+mat-card {
+  max-width: 60%;
+  margin: 1em auto;
+  text-align: center;
+}

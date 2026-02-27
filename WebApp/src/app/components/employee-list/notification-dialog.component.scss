@@ -1,0 +1,32 @@
+.notification-dialog {
+  padding: 24px;
+  width: 350px;
+  max-width: 90vw;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  .title {
+    margin: 0 0 16px 0;
+    font-size: 22px;
+    color: #4caf50; // zelena boja za uspeh
+    font-weight: 600;
+  }
+
+  .message {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 24px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+
+    button {
+      min-width: 100px;
+      border-radius: 8px;
+    }
+  }
+}

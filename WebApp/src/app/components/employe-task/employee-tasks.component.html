@@ -1,0 +1,57 @@
+<!-- employee-tasks.component.html -->
+<div class="tasks-container">
+  <h2>Moji zadaci</h2>
+
+  <div *ngIf="loading" class="loading">
+    <p>Učitavanje zadataka...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && tasks.length === 0" class="no-tasks">
+    <p>Trenutno nemate dodeljenih zadataka.</p>
+  </div>
+
+  <div *ngIf="!loading && tasks.length > 0" class="tasks-list">
+    <div *ngFor="let task of tasks" 
+         class="task-card"
+         [ngClass]="getStatusClass(task.isCompleted)">
+      
+      <div class="task-header">
+        <h3>{{ task.taskDescription }}</h3>
+        <span class="status-badge" 
+              [ngClass]="task.isCompleted ? 'badge-completed' : 'badge-pending'">
+          {{ task.isCompleted ? 'Završeno' : 'U toku' }}
+        </span>
+      </div>
+
+      <div class="task-details">
+        <div class="detail-row">
+          <span class="label">Dodeljeno:</span>
+          <span class="value">{{ task.assignedDate | date: 'dd.MM.yyyy' }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Rok:</span>
+          <span class="value" 
+                [ngClass]="isOverdue(task.dueDate) ? 'overdue' : ''">
+            {{ task.dueDate | date: 'dd.MM.yyyy' }}
+            <span *ngIf="isOverdue(task.dueDate)" class="overdue-label">
+              (Prekoračen rok)
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="task-actions">
+        <button 
+          (click)="toggleTask(task.id)"
+          class="btn"
+          [ngClass]="task.isCompleted ? 'btn-uncomplete' : 'btn-complete'">
+          {{ task.isCompleted ? '↶ Označi kao nedovršeno' : '✓ Označi kao završeno' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

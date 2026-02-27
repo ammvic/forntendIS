@@ -1,0 +1,36 @@
+<div class="adoption-requests-container">
+
+  <h1>Zahtevi za usvajanje</h1>
+
+  <!-- Poruke -->
+  <div *ngIf="successMessage" class="alert success">
+    {{ successMessage }}
+    <button (click)="closeMessage()">✖</button>
+  </div>
+  <div *ngIf="errorMessage" class="alert error">
+    {{ errorMessage }}
+    <button (click)="closeMessage()">✖</button>
+  </div>
+
+  <div *ngIf="loading">Učitavanje...</div>
+
+  <div *ngIf="!loading && requests.length === 0">
+    Nema novih zahteva.
+  </div>
+
+  <div class="requests-grid" *ngIf="requests.length > 0">
+    <div class="request-card" *ngFor="let r of requests">
+      <h3>{{ r.fullName }}</h3>
+      <p><strong>Email:</strong> {{ r.email }}</p>
+      <p><strong>Telefon:</strong> {{ r.phone }}</p>
+      <p><strong>Životinja ID:</strong> {{ r.animal.id }} | Tip: {{ r.animal.animalType }} | Status: {{ r.animal.status }}</p>
+      <p><strong>Poslato:</strong> {{ r.sentAt | date:'short' }}</p>
+
+      <div class="actions">
+        <button class="approve" (click)="approveRequest(r.id)">Prihvati</button>
+        <button class="reject" (click)="rejectRequest(r.id)">Odbij</button>
+      </div>
+    </div>
+  </div>
+
+</div>

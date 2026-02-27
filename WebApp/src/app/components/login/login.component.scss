@@ -1,0 +1,36 @@
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+.signin-content {
+  padding: 60px 1rem;
+}
+.full-width-input {
+  width: 100%;
+}
+
+.mat-raised-button{
+  margin-bottom: 20px;
+  background-color: #f39c12;
+}
+.mat-raised-button:link,
+.mat-raised-button:visited {
+  display: inline-block;
+  font-weight: 300;
+  text-decoration: none;
+  border-radius: 200px;
+  transition: background-color 0.5s, border 0.2s, color 0.5s;
+}
+.mat-raised-button:link, .mat-raised-button:visited {
+  background-color: #f39c12;
+  color: white;
+}
+.mat-raised-button:hover, .mat-raised-button:active{
+  background-color: #b87409;
+}
+.mat-raised-button:hover,
+.mat-raised-button:active {
+  background-color: #b87409;
+  color: white;
+}

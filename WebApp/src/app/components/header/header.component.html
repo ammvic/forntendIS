@@ -1,0 +1,49 @@
+<div class="navbar" [class.scrolled]="isScrolled">
+  <div class="nav-left">
+    <a routerLink="/" class="logo">
+      <i class="fas fa-paw"></i> AZIL
+    </a>
+
+    <div class="links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Početna</a>
+
+      <a *ngIf="checkLogin()  && isAdmin()" routerLink="/animal/register" routerLinkActive="active">
+        Registruj životinju
+      </a>
+
+     <a *ngIf="checkLogin() && (isAdmin() || isKorisnik())" routerLink="/animal/list" routerLinkActive="active">
+  Lista životinja
+</a>
+
+
+      <a *ngIf="checkLogin() && isAdmin()" routerLink="/employee/list" routerLinkActive="active">
+        Lista zaposlenih
+      </a>
+
+       <a  routerLink="/animals" routerLinkActive="active">
+       Prikazi zivotinje
+      </a>
+ <a  *ngIf="checkLogin() && isAdmin()"  routerLink="/request" routerLinkActive="active">
+       Zahtevi za usvajanje
+      </a>
+
+   <a  *ngIf="checkLogin() && isAdmin()"  routerLink="/admintask" routerLinkActive="active">
+       Zadaci zaposlenih
+      </a>
+
+      <a  *ngIf="checkLogin() && isKorisnik() || isVeterinar()"  routerLink="/employetask" routerLinkActive="active">
+       Moji zadaci
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-right">
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="checkLogin()" class="profile-btn">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onLogout()">Odjavi se</button>
+    </mat-menu>
+  </div>
+</div>

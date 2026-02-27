@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{ data.employee ? 'Izmeni zaposlenog' : 'Dodaj zaposlenog' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="employeeForm">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Ime</mat-label>
+      <input matInput formControlName="firstName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Prezime</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Uloga</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="Volonter">Volunteer</mat-option>
+        <mat-option value="Administrator">Admin</mat-option>
+        <mat-option value="Korisnik">Korisnik</mat-option>
+        <mat-option value="Veterinar">Veterinar</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Datum zapošljavanja</mat-label>
+      <input matInput formControlName="employmentDate" type="date" />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Otkaži</button>
+  <button mat-button color="primary" (click)="save()">Sačuvaj</button>
+</div>

@@ -1,0 +1,42 @@
+[
+  {
+    "city": "Beograd",
+    "region": ["Stari grad", "Novi Beograd", "Zemun", "Palilula", "Savski venac", "Voždovac", "Čukarica", "Zvezdara"]
+  },
+  {
+    "city": "Sarajevo",
+    "region": ["Centar", "Novi Grad", "Novo Sarajevo", "Stari Grad", "Ilidža", "Vogošća", "Hadžići", "Ilijaš"]
+  },
+  {
+    "city": "Podgorica",
+    "region": ["Stara Varoš", "Momišići", "Zagorič", "Tuzi", "Golubovci", "Konik", "Blok V", "Masline"]
+  },
+  {
+    "city": "Bukurešt",
+    "region": ["Sector 1", "Sector 2", "Sector 3", "Sector 4", "Sector 5", "Sector 6"]
+  },
+  {
+    "city": "Sofija",
+    "region": ["Lozenec", "Mladost", "Oborishte", "Lyulin", "Krasno selo", "Vitosha", "Triaditsa", "Nadezhda"]
+  },
+  {
+    "city": "Budimpešta",
+    "region": ["I. kerület", "II. kerület", "III. kerület", "IV. kerület", "V. kerület", "VI. kerület", "VII. kerület", "VIII. kerület"]
+  },
+  {
+    "city": "Novi Sad",
+    "region": ["Stari grad", "Podbara", "Liman", "Detelinara", "Grbavica", "Telep", "Klisa", "Adice"]
+  },
+  {
+    "city": "Banja Luka",
+    "region": ["Centar", "Starčevica", "Borik", "Lazarevo", "Obilićevo", "Petrićevac", "Nova Varoš", "Kočićev Vijenac"]
+  },
+  {
+    "city": "Niš",
+    "region": ["Medijana", "Palilula", "Pantelej", "Crveni Krst", "Niška Banja", "Durlan", "Čair"]
+  },
+  {
+    "city": "Temišvar",
+    "region": ["Centru", "Fabric", "Calea Șagului", "Calea Aradului", "Calea Lugojului", "Mehala", "Plopi", "Soarelui"]
+  }
+]
